@@ -52,7 +52,7 @@ const PatientInfo = ({ user }: { user: User }) => {
     };
 
     fetchDoctors();
-  }, [doctorsList]);
+  }, []);
 
   const form = useForm<z.infer<typeof PatientFormValidation>>({
     //resolver: zodResolver(PatientFormValidation),

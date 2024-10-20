@@ -108,7 +108,7 @@ const Hospital = ({ params: { hospitalId } }: SearchParamProps) => {
     };
 
     fetchAppointmentCount();
-  }, [doctorId, hospitalId]);
+  }, [hospitalId]);
 
   // Separate function to fetch sessions for a doctor
   const fetchSessions = async (doctorId: number) => {
