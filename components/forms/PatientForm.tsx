@@ -43,7 +43,7 @@ export function PatientForm() {
   async function onSubmit(values: z.infer<typeof UserFormValidation>) {
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:3000/api/register', values);
+      const response = await axios.post('/api/register', values);
       
       console.log('Success:', response.data);
   

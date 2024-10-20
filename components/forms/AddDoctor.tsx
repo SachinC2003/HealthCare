@@ -53,7 +53,7 @@ export function AddDoctor({ hospital }: { hospital: Hospital }) {
     };
     console.log("hii from req")
     try {
-      await axios.post("http://localhost:3000/api/add-doctor", doctor, {
+      await axios.post("/api/add-doctor", doctor, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

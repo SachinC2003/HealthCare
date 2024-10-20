@@ -42,7 +42,7 @@ export function HospitalForm() {
   async function onSubmit(values: z.infer<typeof HospitalFormValidation>) {
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:3000/api/hospitalregister', values);
+      const response = await axios.post('/api/hospitalregister', values);
       
       console.log('Success:', response.data);
   

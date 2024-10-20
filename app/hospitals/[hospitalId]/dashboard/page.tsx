@@ -132,7 +132,7 @@ const Hospital = ({ params: { hospitalId } }: SearchParamProps) => {
 
   const handleDeleteDoctor = async (doctorId: number) => {
     try {
-      const response = await axios.delete(`http://localhost:3000/api/delete-doctor`, {
+      const response = await axios.delete(`/api/delete-doctor`, {
         params: { id: doctorId },
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}` // Assuming you store the token in localStorage
@@ -154,7 +154,7 @@ const Hospital = ({ params: { hospitalId } }: SearchParamProps) => {
 
   const handleDeleteSession = async (sessionId: number) => {
     try {
-      const response = await axios.delete(`http://localhost:3000/api/delete-session`, {
+      const response = await axios.delete(`/api/delete-session`, {
         params: { id: sessionId },
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}` // Assuming you store the token in localStorage

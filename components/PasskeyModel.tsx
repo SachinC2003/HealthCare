@@ -38,7 +38,7 @@ function PasskeyModel({ otp, id }: { otp: string, id: string }) {
         if (passkey === otp) {
             try {
                 // Assuming you have an API endpoint to log in the user after OTP validation
-                const response = await axios.post(`http://localhost:3000${apiEndpoint}`, { id:id });
+                const response = await axios.post(`${apiEndpoint}`, { id:id });
                 if (response.status === 200) {
                     // Store authentication token or update session if needed
                     const { token } = response.data;

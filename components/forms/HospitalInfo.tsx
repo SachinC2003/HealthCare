@@ -44,7 +44,7 @@ const HospitalInfo = ({ hospital }: { hospital: Hospital }) => {
       }
 
       try{
-            const response = await axios.post(`http://localhost:3000/api/hospital-info`, info, {
+            const response = await axios.post(`/api/hospital-info`, info, {
                 headers:{
                     Authorization:`Bearer ${token}`
                 }

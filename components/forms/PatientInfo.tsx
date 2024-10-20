@@ -75,7 +75,7 @@ const PatientInfo = ({ user }: { user: User }) => {
       formData.append("file", values.identificationDocument[0]);
 
       try {
-        const response = await axios.post("http://localhost:3000/api/upload-img", formData, {
+        const response = await axios.post("/api/upload-img", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -132,7 +132,7 @@ const PatientInfo = ({ user }: { user: User }) => {
     };
 
     try {
-      await axios.post("http://localhost:3000/api/patient-info", info, {
+      await axios.post("/api/patient-info", info, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

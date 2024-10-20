@@ -41,7 +41,7 @@ export function AddSession({ doctorId }: { doctorId: number }) {
     };
 
     try {
-      await axios.post("http://localhost:3000/api/add-session", session, {
+      await axios.post("/api/add-session", session, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

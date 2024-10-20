@@ -44,7 +44,7 @@ export function LoginForm() {
     setIsLoading(true);
     console.log("hii from otp 1");
     try {
-      const response = await axios.post("http://localhost:3000/api/otp", values)
+      const response = await axios.post("/api/otp", values)
       console.log('Success:', response.data);
       setOtp(response.data.otp);
       setId(response.data.id);
