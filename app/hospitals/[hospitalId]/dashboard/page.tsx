@@ -95,7 +95,7 @@ const Hospital = ({ params: { hospitalId } }: SearchParamProps) => {
 
     fetchHospital();
     fetchDoctors();
-  }, []);
+  }, [hospitalId]);
 
   useEffect(() => {
     const fetchAppointmentCount = async () => {
@@ -108,7 +108,7 @@ const Hospital = ({ params: { hospitalId } }: SearchParamProps) => {
     };
 
     fetchAppointmentCount();
-  }, [doctorId]);
+  }, [doctorId, hospitalId]);
 
   // Separate function to fetch sessions for a doctor
   const fetchSessions = async (doctorId: number) => {

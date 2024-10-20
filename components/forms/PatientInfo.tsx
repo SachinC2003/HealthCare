@@ -52,7 +52,7 @@ const PatientInfo = ({ user }: { user: User }) => {
     };
 
     fetchDoctors();
-  }, []);
+  }, [doctorsList]);
 
   const form = useForm<z.infer<typeof PatientFormValidation>>({
     //resolver: zodResolver(PatientFormValidation),
@@ -436,8 +436,9 @@ const onIdentificationDocumentChange = (files: File[]) => {
         <SubmitButton
           text="Next"
           isLoading={isLoading}
-          children={"Next"}
-        />
+        >
+          NEXT
+        </SubmitButton>
       </form>
     </Form>
   );

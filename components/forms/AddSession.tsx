@@ -93,8 +93,10 @@ export function AddSession({ doctorId }: { doctorId: number }) {
             <SubmitButton
               text="Next"
               isLoading={isLoading}
-              children={"Next"}
-            />
+            >
+              NEXT
+            </SubmitButton>
+            
           </form>
         </Form>
       </div>

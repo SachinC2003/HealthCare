@@ -161,8 +161,9 @@ const HospitalInfo = ({ hospital }: { hospital: Hospital }) => {
         <SubmitButton
           text="Next"
           isLoading={isLoading}
-          children={"Next"}
-        />
+        >
+          NEXT
+        </SubmitButton>
       </form>
     </FormProvider>
   );

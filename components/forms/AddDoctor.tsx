@@ -21,6 +21,7 @@ type DoctorFormData = z.infer<typeof DoctorFormValidation>;
 export function AddDoctor({ hospital }: { hospital: Hospital }) {
   const [isClient, setIsClient] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   // Ensure the component is rendered on the client-side
   useEffect(() => {
@@ -60,7 +61,7 @@ export function AddDoctor({ hospital }: { hospital: Hospital }) {
       toast.success("Doctor added successfully.");
       window.location.reload();
       if (isClient) {
-        const router = useRouter();
+        
         router.push(`/patients/${hospital.id}/new-appointment`);
       }
     } catch (error) {
@@ -175,8 +176,9 @@ export function AddDoctor({ hospital }: { hospital: Hospital }) {
             <SubmitButton
               text="Next"
               isLoading={isLoading}
-              children={"Next"}
-            />
+            >
+              NEXT
+            </SubmitButton>
           </form>
         </Form>
       </div>
