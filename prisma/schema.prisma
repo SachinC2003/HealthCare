@@ -13,10 +13,116 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-    id        Int      @id @default(autoincrement())
-    name      String
-    email     String   @unique
-    phone     String
-    createdAt DateTime @default(now())
+model User {
+  id        Int          @id @default(autoincrement())
+  name      String
+  email     String       @unique
+  phone     String
+  createdAt DateTime     @default(now())
+  userInfo  Information?
+  userAppo  Appointment[]
+}
+
+model Information {
+  id                        Int          @id @default(autoincrement())
+  userId                    Int          @unique// Foreign key
+  user                      User         @relation(fields: [userId], references: [id])
+  name                      String
+  email                     String
+  phone                     String
+  birthDate                 DateTime
+  gender                    String
+  address                   String
+  occupation                String
+  emergencyContactName      String
+  emergencyContactNumber    String
+  primaryPhysician          String
+  insuranceProvider         String
+  insurancePolicyNumber     String
+  allergies                 String
+  currentMedication         String
+  familyMedicalHistory      String
+  pastMedicalHistory        String
+  identificationType        String
+  identificationNumber      String
+  identificationDocument    String?      // Adjust type if needed
+  privacyConsent            Boolean
+  disclosureConsent         Boolean
+  treatmentConsent          Boolean
+}
+
+model Hospital {
+  id            Int          @id @default(autoincrement())
+  hospitalName  String
+  email         String       @unique
+  phone         String
+  createdAt     DateTime     @default(now())
+  hospitalInfo  HospitalInformation?
+  doctors       Doctor[]     // One-to-many relationship with Doctor
+  hospital      Appointment[]
+  //sessions      Session[]
+}
+
+model HospitalInformation {
+  id                        Int              @id @default(autoincrement())
+  hospitalId                Int              @unique // Foreign key
+  hospital                  Hospital         @relation(fields: [hospitalId], references: [id])
+  hospitalName              String
+  email                     String
+  phone                     String
+  address                   String
+  hospitalType              String
+  licenseNo                 String
+  governmentScheme          String
+}
+
+model Doctor {
+  id             Int      @id @default(autoincrement()) // Unique ID
+  hospitalId     Int                                  // Foreign key
+  hospital       Hospital @relation(fields: [hospitalId], references: [id]) // Relationship to Hospital
+  firstName      String
+  lastName       String
+  email          String   @unique
+  phone          String
+  specialization String
+  qualification  String
+  experience     String
+  iconImage      String?  // Optional field for profile picture URL
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  appointments   Appointment[]
+  sessions       Session[]  // Relationship to sessions
+}
+
+
+model Session {
+  id          Int      @id @default(autoincrement())  // Unique ID
+  day         String                                 // Day of the session (e.g., "Monday", "Tuesday")
+  startTime   DateTime                               // Start time of the session
+  endTime     DateTime                               // End time of the session
+  doctorId    Int                                 // Foreign key to Doctor
+  doctor      Doctor   @relation(fields: [doctorId], references: [id], onDelete: Cascade) // Relationship to Doctor
+  //hospitalId     Int                                  // Foreign key
+  //hospital       Hospital @relation(fields: [hospitalId], references: [id]) // Relationship to Hospital
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+
+
+model Appointment {
+  id                  Int          @id @default(autoincrement())
+  userId              Int
+  user                User         @relation(fields: [userId], references: [id]) // Corrected
+  doctorId            Int
+  doctor              Doctor       @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  hospitalId          Int
+  hospital            Hospital     @relation(fields: [hospitalId], references: [id])
+  primaryPhysician    String?
+  schedule            DateTime?
+  reason              String?
+  note                String?
+  cancellationReason  String?
+  status              String
+  createdAt           DateTime     @default(now())
 }

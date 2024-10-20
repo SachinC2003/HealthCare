@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Plus_Jakarta_Sans as FontSans } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { ToastContainer } from "react-toastify"; // Import ToastContainer
+import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
 
 import { cn } from "@/lib/utils";
 
@@ -35,6 +37,15 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="dark">
           {children}
+          <ToastContainer 
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            closeOnClick
+            pauseOnHover
+            draggable
+            theme="light"
+          />
         </ThemeProvider>
       </body>
     </html>

@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import Image from 'next/image';
 import { Button } from './ui/button';
 
@@ -25,6 +25,41 @@ const SubmitButton = ({ isLoading, className, children }: ButtonProps) => {
             className="animate-spin"
           />
           Loading...
+        </div>
+      ) : (
+        children 
+      )}
+    </Button>
+  );
+}
+
+export default SubmitButton;*/
+import React from 'react';
+import Image from 'next/image';
+import { Button, ButtonProps } from './ui/button';
+
+interface SubmitButtonProps extends ButtonProps {
+  isLoading: boolean;
+  text?: string; // Added the 'text' property
+}
+
+const SubmitButton = ({ isLoading, className, children, text }: SubmitButtonProps) => {
+  return (
+    <Button 
+      type="submit" 
+      disabled={isLoading} 
+      className={className ?? 'shad-primary-btn w-full'}
+    >
+      {isLoading ? (
+        <div className='flex items-center gap-4'>
+          <Image
+            src="/assets/icons/loader.svg"  
+            alt="loader"
+            width={24}
+            height={24}
+            className="animate-spin"
+          />
+          {text || 'Loading...'} {/* Use the 'text' prop if available, otherwise default to 'Loading...' */}
         </div>
       ) : (
         children 
