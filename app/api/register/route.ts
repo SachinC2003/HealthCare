@@ -55,6 +55,7 @@ export async function POST(request: Request) {
     console.log("token", token);
     return NextResponse.json({ message: 'Registration successful!', token, user }, { status: 200 });
   } catch (error) {
+    console.log(error)
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.errors }, { status: 400 });
     }

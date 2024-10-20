@@ -57,6 +57,7 @@ export function PatientForm() {
       router.push(`/patients/${userId}/patientInfo`); // Redirect to the admin page after registration
       toast.success("Sign up successfully.");
     } catch (err) {
+      console.log(err)
       if (axios.isAxiosError(err)) {
         console.error('Axios Error:', err.response?.data || err.message);
       } else {
