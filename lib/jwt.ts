@@ -23,7 +23,9 @@ export function signToken(payload: object, expiresIn: string = '10h'): string {
 }*/
 export function verifyToken(token: string): CustomJwtPayload {
   try {
+    console.log("hii from verifytoken")
     const decoded = jwt.verify(token, SECRET_KEY) as CustomJwtPayload;
+    console.log("decoded from vari", decoded)
     return decoded;
   } catch (err) {
     //console.error('Token verification error:', err.message); // Log specific error message

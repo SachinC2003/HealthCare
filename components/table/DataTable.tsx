@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/table";
 
 // Define Appointment type
-type Appointment = {
+export type Appointment = {
   id: number;
   doctor: {
     name: string;
@@ -51,6 +51,7 @@ export function DataTable<TData, TValue>({
     []
   );
   const [rowSelection, setRowSelection] = React.useState({});
+
   const table = useReactTable({
     data,
     columns,
@@ -73,7 +74,7 @@ export function DataTable<TData, TValue>({
       {/* Filter input */}
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter doctor..."
+          placeholder="Filter by doctor name..."
           value={
             (table.getColumn("doctor.name")?.getFilterValue() as string) ?? ""
           }
@@ -104,8 +105,8 @@ export function DataTable<TData, TValue>({
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
+            {table.getFilteredRowModel().rows?.length ? (
+              table.getFilteredRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}

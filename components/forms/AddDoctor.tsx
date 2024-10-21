@@ -10,7 +10,7 @@ import axios from "axios";
 import { DoctorFormValidation } from "@/lib/validation";
 import { DoctorFormDefaultValues } from "@/app/constants";
 import { Hospital } from "@prisma/client";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-phone-number-input/style.css";
 import { toast } from "react-toastify";
@@ -62,7 +62,7 @@ export function AddDoctor({ hospital }: { hospital: Hospital }) {
       window.location.reload();
       if (isClient) {
         
-        router.push(`/patients/${hospital.id}/new-appointment`);
+        router.push(`/hospitals/${hospital.id}/dashboard`);
       }
     } catch (error) {
       toast.error("Error to add doctor.");

@@ -23,6 +23,9 @@ import { getSessions } from '@/app/actions/session.actions';
 import { getCount } from '@/app/actions/appoCount.actions';
 import { Prisma } from '@prisma/client';
 import axios from 'axios';
+import { getHospitalAppo } from '@/app/actions/hospitalAppos';
+import { toast } from 'react-toastify';
+import { default_Appointment } from '@/app/constants';
 
 interface Doctor {
   id: number;
@@ -72,7 +75,7 @@ const Hospital = ({ params: { hospitalId } }: SearchParamProps) => {
   const [addSession, setAddSession] = useState(false);
   const [data, setData] = useState<Appointment[]>([]);
   const [appointmentCounts, setAppointmentCounts] = useState<(Prisma.PickEnumerable<Prisma.AppointmentGroupByOutputType, "status"> & { _count: { status: number } })[] | null>(null);
-
+  
   // Fetch Hospital, Doctors, and Sessions separately
   useEffect(() => {
     const fetchHospital = async () => {
@@ -93,6 +96,38 @@ const Hospital = ({ params: { hospitalId } }: SearchParamProps) => {
       }
     };
 
+    const fetchAppointments = async() => {
+      try {
+          const appointments = await getHospitalAppo(Number(hospitalId));
+          
+          // Handle null case
+          if (!appointments) {
+              setData([]);
+              return;
+          }
+  
+          // Transform the data
+          const formattedAppointments: Appointment[] = appointments.map(appt => ({
+              id: appt.id,
+              doctor: {
+                  name: appt.doctor.firstName
+              },
+              hospital: {
+                  name: appt.hospital.hospitalName
+              },
+              schedule: appt.schedule,
+              status: appt.status
+          }));
+          
+          setData(formattedAppointments);
+          console.log("Formatted appointments:", formattedAppointments);
+      } catch(error) {
+          console.error('Error fetching appointments:', error);
+          setData([]);
+      }
+    }
+  
+    fetchAppointments();
     fetchHospital();
     fetchDoctors();
   }, [hospitalId]);
@@ -141,6 +176,7 @@ const Hospital = ({ params: { hospitalId } }: SearchParamProps) => {
   
       if (response.status === 200) {
         console.log('Doctor deleted successfully:', response.data);
+        toast.success("Doctor deleted succusefully")
         // Optionally, update your UI or state here
         // For example, remove the doctor from a list or redirect
       } else {
@@ -163,6 +199,7 @@ const Hospital = ({ params: { hospitalId } }: SearchParamProps) => {
   
       if (response.status === 200) {
         console.log('session deleted successfully:', response.data);
+        toast.success("Session deleted succusefully")
         // Optionally, update your UI or state here
         // For example, remove the doctor from a list or redirect
       } else {
@@ -318,11 +355,13 @@ const Hospital = ({ params: { hospitalId } }: SearchParamProps) => {
           </DropdownMenu>
         </section>
 
+        <div className="container mx-auto py-10">
         {data.length > 0 ? (
           <DataTable columns={columns} data={data} />
         ) : (
-          <p>Loading data...</p>
+          <DataTable columns={columns} data={[default_Appointment]} />
         )}
+      </div>
       </main>
 
       {addDoctor && (

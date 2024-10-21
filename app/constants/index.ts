@@ -1,3 +1,4 @@
+import { Appointment } from "@prisma/client";
 import { z } from "zod";
 
 export const GenderOptions = ["Male", "Female", "Other"];
@@ -127,3 +128,15 @@ export const HospitalTypes = [
     name: "Pulmonology Hospital",
   },
 ];
+
+export const default_Appointment = {
+  id: 0,
+  doctor: {
+    name: ".............",
+  },
+  hospital: {
+    name: ".........",
+  },
+  schedule: null,
+  status: "............",
+};
