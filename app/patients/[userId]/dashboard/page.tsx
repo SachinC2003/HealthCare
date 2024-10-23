@@ -7,7 +7,7 @@ import StatCard from '@/components/StatCard';
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { DataTable } from '@/components/table/DataTable';
-import { Appointment, columns } from '@/components/table/columns';
+import { Appointment, columns } from '@/components/table/columns/patientColumn';
 import {
   Select,
   SelectContent,
@@ -19,6 +19,7 @@ import { useRouter } from "next/navigation";
 import { getCount } from '@/app/actions/appoCountPatient.actions';
 import { Prisma } from '@prisma/client';
 import { getPatirntAppo } from '@/app/actions/patientAppos';
+import { default_Appointment } from '@/app/constants';
 
 
 interface SearchParamProps {
@@ -152,7 +153,7 @@ const PatientDashboard = ({ params: { userId } }: SearchParamProps) => {
           />
           <StatCard
             type='cancelled'
-            count={appointmentCounts?.find(count => count.status === 'cancelled')?._count?.status || 0} 
+            count={appointmentCounts?.find(count => count.status === 'canceled')?._count?.status || 0} 
             label="Cancelled"
             icon='/accests/icons/cancel.png'
           />
@@ -172,15 +173,12 @@ const PatientDashboard = ({ params: { userId } }: SearchParamProps) => {
         </section>
 
         <div className="container mx-auto py-10">
-          {data.length > 0 ? (
-            <DataTable columns={columns} data={data} />
-          ) : (
-            <section className="mt-8">
-              <h2 className="text-xl font-semibold mb-4">Appointment History</h2>
-              <p className="text-gray-600">No past appointments found.</p>
-            </section>
-          )}
-        </div>
+        {data.length > 0 ? (
+          <DataTable columns={columns} data={data} />
+        ) : (
+          <DataTable columns={columns} data={[default_Appointment]} />
+        )}
+      </div>
       </main>
     </div>
   );

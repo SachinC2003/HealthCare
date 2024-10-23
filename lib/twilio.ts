@@ -13,8 +13,27 @@ export const sendOtpToUser = (phoneNumber:any, otp: any) => {
 };
 
 export const sendAppointmentConfirmation = (phoneNumber: string, appointmentDetails: string) => {
+    console.log("cancel mass")
     return client.messages.create({
         body: `Your appointment has been successfully send. ${appointmentDetails}`,
+        from: process.env.TWILIO_PHONE_NUMBER,
+        to: phoneNumber
+    });
+};
+
+export const sendAppointmentScheduleMassege = (phoneNumber: string) => {
+    console.log("cancel mass")
+    return client.messages.create({
+        body: `Your appointment has been Scheduled.`,
+        from: process.env.TWILIO_PHONE_NUMBER,
+        to: phoneNumber
+    });
+};
+
+export const sendAppointmentCanceledMassege = (phoneNumber: string) => {
+    console.log("cancel mass")
+    return client.messages.create({
+        body: `Your appointment has been Canceled due to some amergency.`,
         from: process.env.TWILIO_PHONE_NUMBER,
         to: phoneNumber
     });

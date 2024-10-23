@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Checkbox } from "@radix-ui/react-checkbox";
-import Appointment from "../forms/Appointment";
+import Appointment from "../../forms/Appointment";
 
 // First, define the Appointment type that matches what you want to display
 // In columns.tsx

@@ -19,8 +19,7 @@ export const getCount = async (hospitalId: number) => {
                 status: true
             }
         });
-        //console.log("hhhh")
-        //console.log(appointmentCounts)
+        console.log(appointmentCounts)
         // Return the counts for each status
         return appointmentCounts;
     } catch (error) {

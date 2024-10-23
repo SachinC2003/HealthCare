@@ -35,6 +35,10 @@ export type Appointment = {
   };
   schedule: Date | null;
   status: string;
+  user: {
+    name: string;
+    phone: string
+  }
 };
 
 interface DataTableProps<TData, TValue> {

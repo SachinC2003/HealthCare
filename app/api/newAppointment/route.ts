@@ -62,7 +62,7 @@ export async function POST(request: Request) {
     });
     console.log("apo 8")
     // Send SMS confirmation
-    /*if (user.phone) {
+    if (user.phone) {
       const appointmentDetails = `Doctor: ${formData.primaryPhysician}, Date: ${new Date(formData.schedule).toLocaleString()}`;
       try {
         await sendAppointmentConfirmation(user.phone, appointmentDetails);
@@ -70,7 +70,7 @@ export async function POST(request: Request) {
         console.error('Error sending SMS confirmation:', smsError);
         // Optionally handle SMS sending failure (e.g., log it, but don't fail the whole request)
       }
-    }*/
+    }
     console.log("apo 9")
     return NextResponse.json({
       message: 'Appointment saved successfully!',

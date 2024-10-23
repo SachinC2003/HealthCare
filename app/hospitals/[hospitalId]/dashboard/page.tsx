@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import StatCard from '@/components/StatCard';
 import { DataTable } from '@/components/table/DataTable';
-import { Appointment, columns } from '@/components/table/columns';
+import { Appointment, columns } from '@/components/table/columns/hospitalColumn';
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { AddDoctor } from '@/components/forms/AddDoctor';
@@ -116,7 +116,11 @@ const Hospital = ({ params: { hospitalId } }: SearchParamProps) => {
                   name: appt.hospital.hospitalName
               },
               schedule: appt.schedule,
-              status: appt.status
+              status: appt.status,
+              user: {
+                name : appt.user.name,
+                phone: appt.user.phone
+              }
           }));
           
           setData(formattedAppointments);
@@ -239,7 +243,7 @@ const Hospital = ({ params: { hospitalId } }: SearchParamProps) => {
         <section className='admin-stat'>
         <StatCard
           type='appointments'
-          count={appointmentCounts?.find(count => count.status === 'appointment')?._count?.status || 0} 
+          count={appointmentCounts?.find(count => count.status === 'scheduled')?._count?.status || 0} 
           label="Appointments"
           icon='/accests/icons/appointment.png'
         />
@@ -251,7 +255,7 @@ const Hospital = ({ params: { hospitalId } }: SearchParamProps) => {
         />
         <StatCard
           type='cancelled'
-          count={appointmentCounts?.find(count => count.status === 'cancelled')?._count?.status || 0} 
+          count={appointmentCounts?.find(count => count.status === 'canceled')?._count?.status || 0} 
           label="Cancelled"
           icon='/accests/icons/cancel.png'
         />

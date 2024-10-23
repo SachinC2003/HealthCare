@@ -139,4 +139,7 @@ export const default_Appointment = {
   },
   schedule: null,
   status: "............",
+  user: {name :"............",
+    phone: "............"
+  }
 };

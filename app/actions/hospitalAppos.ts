@@ -21,10 +21,17 @@ export const getHospitalAppo = async (hospitalId : number) =>{
                      select: {
                          hospitalName: true
                      }
-                 }
+                 },
+                 user:{
+                    select:{
+                        name: true,
+                        phone: true
+                    }
+                 },
+
             }
         })
-        console.log(appointment);
+        console.log("hii" ,appointment);
         return appointment;
     }catch(error){
         console.log(error);
