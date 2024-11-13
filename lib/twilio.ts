@@ -11,7 +11,7 @@ export const sendOtpToUser = (phoneNumber:any, otp: any) => {
         to: phoneNumber
     });
 };
-
+ 
 export const sendAppointmentConfirmation = (phoneNumber: string, appointmentDetails: string) => {
     console.log("cancel mass")
     return client.messages.create({
